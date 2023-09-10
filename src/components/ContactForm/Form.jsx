@@ -16,6 +16,9 @@ export class Form extends React.Component {
       number: this.state.number,
       id: nanoid(),
     };
+    // if (this.state.name) {
+    //   alert(`${this.state.name} is already in contacts`);
+    // }
     this.setState({
       name: '',
       number: '',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form } from './PhoneBook/PhoneBook';
+import { Form } from './ContactForm/Form';
 import { ContactList } from './Contacts/ContactList';
 import { Filter } from './Filter/Filter';
 
@@ -37,7 +37,7 @@ export class App extends React.Component {
     }));
   };
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
     const filteredData = this.filterContacts();
     const deleteContact = this.handleContactDelete;
     return (
