@@ -15,7 +15,7 @@ export class Form extends React.Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    this.props.onAddContact({ name, number });
+    this.props.onAddContact(name, number);
     this.setState({ name: '', number: '' });
   };
   render() {

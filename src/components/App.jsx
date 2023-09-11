@@ -17,7 +17,7 @@ export class App extends React.Component {
     filter: '',
   };
 
-  handleAddContact = ({ name, number }) => {
+  handleAddContact = (name, number) => {
     const { contacts } = this.state;
     // const item = contacts.find(item => item.name === name);
     const item = contacts.filter(item =>
