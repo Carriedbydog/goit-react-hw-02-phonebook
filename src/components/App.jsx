@@ -3,6 +3,8 @@ import React from 'react';
 import { Form } from './ContactForm/Form';
 import { ContactList } from './Contacts/ContactList';
 import { Filter } from './Filter/Filter';
+import { nanoid } from 'nanoid';
+import { StyledSubTitle, StyledTitle, StyledWrapper } from 'styles/App.styled';
 
 export class App extends React.Component {
   state = {
@@ -14,14 +16,30 @@ export class App extends React.Component {
     ],
     filter: '',
   };
-  handleAddContact = contact => {
+
+  handleAddContact = ({ name, number }) => {
+    const { contacts } = this.state;
+    // const item = contacts.find(item => item.name === name);
+    const item = contacts.filter(item =>
+      item.name.toLowerCase().includes(name.toLowerCase())
+    );
+
+    if (item.length) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+
+    const contact = {
+      name,
+      number,
+      id: nanoid(),
+    };
+
     this.setState(prev => ({
       contacts: [...prev.contacts, contact],
     }));
   };
-  formSubmitHandler = data => {
-    console.log(data);
-  };
+
   handleChangeFilter = e => {
     this.setState({ filter: e.target.value });
   };
@@ -51,19 +69,16 @@ export class App extends React.Component {
           color: '#010101',
         }}
       >
-        <div>
-          <h1>PhoneBook</h1>
-          <Form
-            onSubmit={this.formSubmitHandler}
-            onAddContact={this.handleAddContact}
-          />
-          <h2>Contacts</h2>
+        <StyledWrapper>
+          <StyledTitle>PhoneBook</StyledTitle>
+          <Form onAddContact={this.handleAddContact} />
+          <StyledSubTitle>Contacts</StyledSubTitle>
           <Filter
             inputFilterData={this.handleChangeFilter}
             filterValue={filter}
           />
           <ContactList contacts={filteredData} onDelete={deleteContact} />
-        </div>
+        </StyledWrapper>
       </div>
     );
   }
