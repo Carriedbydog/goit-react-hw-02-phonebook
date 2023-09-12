@@ -19,12 +19,9 @@ export class App extends React.Component {
 
   handleAddContact = (name, number) => {
     const { contacts } = this.state;
-    // const item = contacts.find(item => item.name === name);
-    const item = contacts.filter(item =>
-      item.name.toLowerCase().includes(name.toLowerCase())
-    );
+    const item = contacts.find(item => item.name === name);
 
-    if (item.length) {
+    if (item) {
       alert(`${name} is already in contacts`);
       return;
     }
